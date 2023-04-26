@@ -4,6 +4,7 @@ const dotenv = require("dotenv").config()
 const mongoose = require("mongoose")
 const userRoutes = require("./routes/user")
 const sauceRoutes = require("./routes/sauce")
+const path = require("path")
 
 mongoose
   .connect(`${process.env.MONGODB_URL}`, {
@@ -26,5 +27,6 @@ app
   })
   .use("/api/auth", userRoutes)
   .use("/api/sauces", sauceRoutes)
+  .use('/images', express.static(path.join(__dirname, 'images')))
 
 module.exports = app

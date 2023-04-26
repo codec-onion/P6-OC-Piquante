@@ -16,16 +16,18 @@ exports.getOneSauce = (req, res, next) => {
 }
 
 exports.createSauce = (req, res, next) => {
-    const sauceProperties = req.body
-    console.log(sauceProperties)
-
-    try {
-      const myObject = JSON.parse(sauceProperties);
-    } catch (error) {
-      if (error instanceof SyntaxError) {
-        console.error('Invalid JSON:', error.message);
-      } else {
-        throw error;
-      }
-    }
+  const sauceProperties = JSON.parse(req.body.sauce)
+  delete sauceProperties.userId
+  const sauce = new Sauce({
+    ...sauceProperties,
+    userId: req.auth.userId,
+    imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
+    likes: 0,
+    dislikes: 0,
+    usersLiked: [],
+    usersDisliked: []
+  })
+  sauce.save()
+    .then(() => res.json({ message: "Sauce ajoutée avec succès." }))
+    .catch(error => res.json({ error }))
 }
