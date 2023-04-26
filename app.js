@@ -1,7 +1,9 @@
 const express = require("express")
+const morgan = require("morgan")
 const dotenv = require("dotenv").config()
 const mongoose = require("mongoose")
 const userRoutes = require("./routes/user")
+const sauceRoutes = require("./routes/sauce")
 
 mongoose
   .connect(`${process.env.MONGODB_URL}`, {
@@ -14,6 +16,7 @@ mongoose
 const app = express()
 
 app
+  .use(morgan("dev"))
   .use(express.json())
   .use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*")
@@ -22,6 +25,6 @@ app
     next()
   })
   .use("/api/auth", userRoutes)
-
+  .use("/api/sauces", sauceRoutes)
 
 module.exports = app

@@ -10,8 +10,8 @@ const sauceShema = mongoose.Schema({
     heat: { type: Number, required: true },
     likes: { type: Number, required: true },
     dislikes: { type: Number, required: true },
-    usersLiked: [{ String }],
-    usersDisliked: [{ String }]
+    usersLiked: [String],
+    usersDisliked: [String]
 })
 
 module.exports = mongoose.model("Sauce", sauceShema)
