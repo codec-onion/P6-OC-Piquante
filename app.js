@@ -25,8 +25,8 @@ app
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE")
     next()
   })
-  .use("/api/auth", userRoutes)
-  .use("/api/sauces", sauceRoutes)
-  .use('/images', express.static(path.join(__dirname, 'images')))
+  .use("https://p6-oc-piquante.vercel.app/api/auth", userRoutes)
+  .use("https://p6-oc-piquante.vercel.app/api/sauces", sauceRoutes)
+  .use('https://p6-oc-piquante.vercel.app/images', express.static(path.join(__dirname, 'images')))
 
 module.exports = app
