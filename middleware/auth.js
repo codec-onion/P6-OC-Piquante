@@ -9,6 +9,6 @@ module.exports = (req, res, next) => {
     req.auth = { userId: userId }
     next()
   } catch(error) {
-    res.status(401).json({ error })
+    res.status(401).json({ message: "Vous n'êtes pas autorisé à accéder à la page demandée.", error })
   }
 }
