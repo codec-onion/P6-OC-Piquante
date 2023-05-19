@@ -5,7 +5,7 @@
 2. [About](#about)
 
 ## Functioning
-***
+
 This project uses the __v18.15.0__ of node.js. It works with the __front application__ that you will find by [clicking on this link](https://github.com/OpenClassrooms-Student-Center/Web-Developer-P6 "Link of the front application").
 
 ### Install
@@ -25,7 +25,6 @@ npm start
 To register a new user, the password must contain at least one lowercase, upper case and number. This is not specified by the front application in case of error despite the fact that I send him a message explaining it. This further enhances user security.
 
 ## About
-***
 
 ### What is Piquante?
 
