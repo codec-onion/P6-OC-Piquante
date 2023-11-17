@@ -17,22 +17,33 @@ exports.getOneSauce = (req, res, next) => {
 
 
 exports.createSauce = (req, res, next) => {
+  console.log(req)
   const sauceObject = JSON.parse(req.body.sauce)
   delete sauceObject.userId
 
-  const sauce = new Sauce({
-    ...sauceObject,
-    userId: req.auth.userId,
-    imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
-    likes: 0,
-    dislikes: 0,
-    usersLiked: [],
-    usersDisliked: []
-  })
+  try {
+    const objectValues = Object.values(sauceObject).toString()
+    for (let value of objectValues){
+      if(value.length === 0){
+        throw error
+      }
+    }
+    const sauce = new Sauce({
+      ...sauceObject,
+      userId: req.auth.userId,
+      imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`,
+      likes: 0,
+      dislikes: 0,
+      usersLiked: [],
+      usersDisliked: []
+    })
+    sauce.save()
+      .then(() => res.status(201).json({ message: "Sauce ajoutée avec succès." }))
+      .catch(error => res.status(400).json({ error }))
+  } catch (error) {
+    res.status(400).json({ message: "Un problème est survenue. Avez-vous pensez à bien renseigner toutes les informations?" })
+  }
 
-  sauce.save()
-    .then(() => res.status(201).json({ message: "Sauce ajoutée avec succès." }))
-    .catch(error => res.status(400).json({ error }))
 }
 
 
