@@ -1,0 +1,10 @@
+{
+    "version": 0.5,
+    "name": "Piiquante",
+    "builds": [
+      { "src": "server.js", "use": "@vercel/node" }
+    ],
+    "routes": [
+      { "src": "/(.*)", "dest": "/server.js" }
+    ]
+}
